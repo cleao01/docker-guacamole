@@ -1,9 +1,9 @@
 #!/bin/bash
 
-GUAC_VER="1.0.0"
+GUAC_VER="1.6.0"
 
 MYSQL_CONFIG=/etc/my.cnf.d/mariadb-server.cnf
-MYSQL_SCHEMA=/opt/guacamole/mysql/schema
+MYSQL_SCHEMA=/opt/guacamole/extensions/guacamole-auth-jdbc/mysql/schema
 MYSQL_DATABASE=/config/databases
 
 sed -i '/\[mysqld\]/a user= '"$PUID"'' "$MYSQL_CONFIG"
@@ -38,7 +38,7 @@ upgrade_database() {
   echo "Upgrade complete."
 }
 
-# If databases do not exist, create them
+# If databases do not exist, create
 if [ -f "$MYSQL_DATABASE"/guacamole/guacamole_user.ibd ]; then
   echo "Database exists."
   if [ -f "$MYSQL_DATABASE"/guacamole/version ]; then
@@ -53,14 +53,19 @@ if [ -f "$MYSQL_DATABASE"/guacamole/guacamole_user.ibd ]; then
       "0.9.13")
         upgrade_database "0.9.14"
         upgrade_database "1.0.0"
+        upgrade_database "1.6.0"		
         ;;
       "0.9.14")
         upgrade_database "1.0.0"
+        upgrade_database "1.6.0"		
         ;;
+      "1.0.0")
+        upgrade_database "1.6.0"
+        ;;		
       esac
     elif (( OLD_SPLIT[2] > NEW_SPLIT[2] )) || (( OLD_SPLIT[1] > NEW_SPLIT[1] )) || (( OLD_SPLIT[0] > NEW_SPLIT[0] )); then
       echo "Database newer revision, no change needed."
-      # revert 1.1.0 back to 1.0.0 to match database version rather than actual version since there have been no changes.
+      # revert back to match database version rather than actual version since there have been no changes.
       echo "$GUAC_VER" > "$MYSQL_DATABASE"/guacamole/version
     else
       echo "Database upgrade not needed."
@@ -70,6 +75,7 @@ if [ -f "$MYSQL_DATABASE"/guacamole/guacamole_user.ibd ]; then
     upgrade_database "0.9.13"
     upgrade_database "0.9.14"
     upgrade_database "1.0.0"
+    upgrade_database "1.6.0"	
   fi
 else
   if [ -f /config/guacamole/guacamole.properties ]; then
@@ -99,6 +105,6 @@ else
     echo "Initialization complete."
   else
     echo "Error! Unable to create database. guacamole.properties file does not exist."
-    echo "If you see this error message please contact support in the unRAID forums: https://forums.unraid.net/topic/54855-support-jasonbean-apache-guacamole/"
+    echo "If you see this error message please contact support in the unRAID forums"
   fi
 fi
