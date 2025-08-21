@@ -41,9 +41,11 @@ docker run -d -v /your-config-location:/config -p 8080:8080 -e OPT_MYSQL=Y cleao
 ```
 
 If using an external Mysql/MariaDB, change guacamole.properties and provide de database:
-Expl. to create and provide schema to an MariaDB external database:
-docker exec -i DatabaseName sh -c 'mariadb -uroot -p"RootPassword" -e"CREATE DATABASE DatabaseName"'
-docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --mysql | docker exec -i DatabaseName sh -c 'mariadb -uroot -p"RootPassword" DatabaseName'
+To create and provide schema to an MariaDB external database:
+
+docker exec -i MySQLDockerName sh -c 'mariadb -uroot -p"RootPassword" -e"CREATE DATABASE DatabaseName"'
+
+docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --mysql | docker exec -i MySQLDockerName sh -c 'mariadb -uroot -p"RootPassword" DatabaseName'
 
 Browse to http://your-host-ip:8080 and login with user and password `guacadmin`
 ---
