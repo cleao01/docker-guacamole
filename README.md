@@ -2,6 +2,7 @@ Apache Guacamole 2in1
 ====
 
 Dockerfile for Guacamole 1.6.0 with internal or external MariaDB server and MySQL, LDAP, DUO, CAS, OPENID, TOTP, QUICKCONNECT, HEADER and SAML authentication
+
 2in1 because server and client are embebbed
 
 Apache Guacamole⁠ is a clientless remote desktop gateway. It supports standard protocols like VNC and RDP.
@@ -51,6 +52,7 @@ If using an external Mysql/MariaDB, change guacamole.properties and provide the 
 
 To create and apply schema to an MariaDB external database:
 Create a database for Guacamole within MySQL ex.: databasename
+
 Run the script on the newly-created database:
 
 docker exec -i MySQLDockerName sh -c 'mariadb -uroot -p"RootPassword" -e"CREATE DATABASE databasename"'
