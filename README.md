@@ -1,8 +1,8 @@
 Apache Guacamole 2in1
 ====
 
-Dockerfile for Guacamole 1.6.0 with embedded oe external MariaDB (MySQL), LDAP, DUO, CAS, OPENID, TOTP, QUICKCONNECT, HEADER and SAML authentication
-2in1 because sever and client are embebed
+Dockerfile for Guacamole 1.6.0 with internal or external MariaDB server and MySQL, LDAP, DUO, CAS, OPENID, TOTP, QUICKCONNECT, HEADER and SAML authentication
+2in1 because server and client are embebbed
 
 Apache Guacamole⁠ is a clientless remote desktop gateway. It supports standard protocols like VNC and RDP.
 Clientless because no plugins or client software are required.
