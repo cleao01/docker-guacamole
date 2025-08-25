@@ -1,22 +1,24 @@
 ### Dockerfile for Apache Guacamole
-### Includes the mysql authentication module preinstalled
+### Includes the mysql authentication preinstalled
 
 ARG GUAC_VER=1.6.0
 
 ########################
 ### Get Guacamole Server
-FROM guacamole/guacd:${GUAC_VER} AS server
+#FROM guacamole/guacd:${GUAC_VER} AS server
+FROM guacamole/guacd:latest AS server
 
 ########################
 ### Get Guacamole Client
-FROM guacamole/guacamole:${GUAC_VER} AS client
+#FROM guacamole/guacamole:${GUAC_VER} AS client
+FROM guacamole/guacamole:latest AS client
 
 ####################
 ### Build Main Image
 
-###############################
-### Build image without MariaDB
-FROM alpine:3.18.5 AS nomariadb
+############################################################
+### Build image without MariaDB server  (Alpine Linux based)
+FROM alpine:3.18.12 AS nomariadb
 ARG GUAC_VER
 LABEL version=$GUAC_VER
 
