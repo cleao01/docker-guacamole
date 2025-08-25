@@ -1,9 +1,12 @@
-Guacamole
+Apache Guacamole 2in1
 ====
 
 Dockerfile for Guacamole 1.6.0 with embedded oe external MariaDB (MySQL), LDAP, DUO, CAS, OPENID, TOTP, QUICKCONNECT, HEADER and SAML authentication
+2in1 because sever and client are embebed
 
-Guacamole is a clientless remote desktop gateway. It supports standard protocols like VNC and RDP.
+Apache Guacamole⁠ is a clientless remote desktop gateway. It supports standard protocols like VNC and RDP.
+Clientless because no plugins or client software are required.
+Thanks to HTML5, once Guacamole is installed on a server, all you need to access your desktops is a web browser.
 
 ---
 Author
@@ -40,18 +43,24 @@ To run using MariaDB for user authentication, launch with the following:
 docker run -d -v /your-config-location:/config -p 8080:8080 -e OPT_MYSQL=Y cleao/guacamole
 ```
 
-If using an external Mysql/MariaDB, change guacamole.properties and provide de database:
-To create and provide schema to an MariaDB external database:
+---
+Initializing the MySQL database
+===
 
-docker exec -i MySQLDockerName sh -c 'mariadb -uroot -p"RootPassword" -e"CREATE DATABASE DatabaseName"'
+If using an external Mysql/MariaDB, change guacamole.properties and provide the database
 
-docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --mysql | docker exec -i MySQLDockerName sh -c 'mariadb -uroot -p"RootPassword" DatabaseName'
+To create and apply schema to an MariaDB external database:
+Create a database for Guacamole within MySQL ex.: databasename
+Run the script on the newly-created database:
 
-Browse to http://your-host-ip:8080 and login with user and password `guacadmin`
+docker exec -i MySQLDockerName sh -c 'mariadb -uroot -p"RootPassword" -e"CREATE DATABASE databasename"'
+docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --mysql | docker exec -i MySQLDockerName sh -c 'mariadb -uroot -p"RootPassword" databasename'
+
+Once the Guacamole image is running, Guacamole will be accessible at: http://your-host-ip:8080 and login with user and password `guacadmin`
+
 ---
 Credits
 ===
 
 Apache Guacamole copyright The Apache Software Foundation, Licenced under the Apache License, Version 9.0.
-
 This docker image is built upon the baseimage made by phusion and forked from hall/guacamole, and further forked from Zuhkov/docker-containers and then aptalca/docker-containers and then jason-bean/docker-guacamole
