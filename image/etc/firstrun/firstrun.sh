@@ -76,6 +76,7 @@ if [ "$OPTMYSQL" = "Y" ] ; then
 	  tar -xzf mysql-connector-j-${JCONNECTOR}.tar.gz
 	  mv mysql-connector-j-${JCONNECTOR}/mysql-connector*.jar /config/guacamole/lib
 	  rm -r mysql-connector-j-${JCONNECTOR}
+	  rm mysql-connector-j-${JCONNECTOR}.tar.gz
       rm -R /config/mysql-schema/*
       cp -R "$EXT_STORE"/extensions/guacamole-auth-jdbc/mysql/schema/* /config/mysql-schema
       CHANGES=true
@@ -86,7 +87,8 @@ if [ "$OPTMYSQL" = "Y" ] ; then
     wget -q https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j-${JCONNECTOR}.tar.gz
 	tar -xzf mysql-connector-j-${JCONNECTOR}.tar.gz
 	mv mysql-connector-j-${JCONNECTOR}/mysql-connector*.jar /config/guacamole/lib
-	rm -r mysql-connector-j-${JCONNECTOR}	
+	rm -r mysql-connector-j-${JCONNECTOR}
+    rm mysql-connector-j-${JCONNECTOR}.tar.gz	
     mkdir /config/mysql-schema
     cp -R "$EXT_STORE"/extensions/guacamole-auth-jdbc/mysql/schema/* /config/mysql-schema
     CHANGES=true

@@ -70,6 +70,7 @@ RUN apk add --no-cache ${RUNTIME_DEPENDENCIES}                                  
     tar -xf apache-tomcat-"$TOMCAT_VERSION".tar.gz                                                                                                                                  && \
     mv apache-tomcat-"$TOMCAT_VERSION"/* /opt/tomcat                                                                                                                                && \
     rmdir apache-tomcat-"$TOMCAT_VERSION"                                                                                                                                           && \
+	rm apache-tomcat-"$TOMCAT_VERSION".tar.gz                                                                                                                                       && \
     find /opt/tomcat -type d -print0 | xargs -0 chmod 700                                                                                                                           && \
     chmod +x /opt/tomcat/bin/*.sh                                                                                                                                                   && \
     mkdir -p /var/lib/tomcat/webapps /var/log/tomcat                                                                                                                                && \

@@ -8,7 +8,7 @@ MYSQL_DATABASE=/config/databases
 
 sed -i '/\[mysqld\]/a user= '"$PUID"'' "$MYSQL_CONFIG"
 mkdir -p /var/run/mysqld /var/log/mysql
-chown -R abc:abc var/log/mysql /var/lib/mysql /var/run/mysqld
+chown -R abc:abc /var/log/mysql /var/lib/mysql /var/run/mysqld
 chmod -R 777 /var/log/mysql /var/lib/mysql /var/run/mysqld
 
 start_mysql() {
